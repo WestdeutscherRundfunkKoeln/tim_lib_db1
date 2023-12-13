@@ -197,6 +197,20 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 			fmt.Println("Err:" + err.Error())
 		}
 		fmt.Println(statement)
+
+		statement = "drop table testtable"
+		stmt, err = oraDB.Prepare(statement)
+		// check for error
+		defer stmt.Close()
+		// suppose we have 2 params one time.Time and other is double
+		vals = nil
+		rows, err = stmt.Query(vals)
+		// check for error
+		defer rows.Close()
+		if err != nil {
+			fmt.Println("Err:" + err.Error())
+		}
+		fmt.Println(statement)
 	}
 }
 
@@ -344,5 +358,12 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		"resultok char(1)," +
 		"errtxt varchar(500)," +
 		"primary key (msname,svcpath))"
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+
+	lvTable = "testtable"
+	lvFields = "(" +
+		"paramkey varchar(50) not null," +
+		"paramvalue varchar(200) not null," +
+		"primary key (paramkey))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 }
