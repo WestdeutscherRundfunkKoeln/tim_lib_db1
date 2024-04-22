@@ -35,6 +35,14 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 			fmt.Println("Err:" + err.Error())
 		}
 		*/
+
+		statement = "drop table tim_lchannel_settings"
+		_, err = db.Exec(statement)
+		if err != nil {
+			fmt.Println(statement + " Err:" + err.Error())
+		} else {
+			fmt.Println(statement + " OK")
+		}
 		statement = "drop table tim_vt_pullstate"
 		_, err = db.Exec(statement)
 		if err != nil {
@@ -213,6 +221,19 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 	println("20220311 define_database_table:" + iConnection)
 	dbsys.CreateDatabaseSchemaIfNotExists(iUseDriver, db, iDatabase)
 
+	/*tim_settings ==================================================*/
+	println("tim_lchannel_settings will be created:iUseDriver:", iUseDriver)
+
+	lvTable = "tim_lchannel_settings"
+	settings := "settings mediumblob, "
+	if iUseDriver != "mysql" {
+		settings = "settings blob, "
+	}
+	lvFields = "(" +
+		"settingsname  varchar(20)," +
+		settings +
+		"primary key (settingsname))"
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 	/* ==================================================*/
 	lvTable = "tim_vt_stateproducer"
 	lvFields = "(" +
