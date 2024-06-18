@@ -179,6 +179,14 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 			fmt.Println("Err:" + err.Error())
 		}
 		fmt.Println(statement)
+
+		statement = "drop table tim_lchannel_settings"
+		_, err = db.Exec(statement)
+		if err != nil {
+			fmt.Println("Err:" + err.Error())
+		}
+		fmt.Println(statement)
+
 	}
 
 }
@@ -383,8 +391,8 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		"createtime varchar(15), " +
 		"namepraefix varchar(50), " +
 		"primary key (instanceid))"
-	lbef, err =
-		dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+		//_, err =
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
 	lvTable = "tim_vt_orderstate"
 	lvFields = "(" +
@@ -442,7 +450,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		"primary key (orderid))"
 	println("tim_imporder fmtxml char(10) and srcxml char(15) adding- ")
 
-	lbef, err = dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+	_, err = dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 	if err != nil {
 		println("ERR=tim_imporder create " + err.Error())
 
@@ -611,16 +619,19 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
 	/*====================================================*/
-	/*lvTable = "tim_general_err"
+	/*tim_settings ==================================================*/
+	println("tim_lchannel_settings will be created:iUseDriver:", iUseDriver)
+
+	lvTable = "tim_lchannel_settings"
+	settings = "settings mediumblob, "
+	if iUseDriver != "mysql" {
+		settings = "settings blob, "
+	}
 	lvFields = "(" +
-		"timehappened varchar(20)," +
-		"errsource varchar(500)," +
-		"errtxt varchar(500), " +
-		"seenflag char(1)," +
-		"seenby varchar(50)," +
-		" primary key (timehappened,errsource))"
+		"settingsname  varchar(20)," +
+		settings +
+		"primary key (settingsname))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
-	*/
 	/*=================================================*/
 
 	lvIdxStatement.Text = `CREATE INDEX ITIMES ON TIM_IMPORDER (TIMEORDERSTATE)`
