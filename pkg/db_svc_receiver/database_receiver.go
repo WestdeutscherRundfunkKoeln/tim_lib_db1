@@ -218,7 +218,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 
 	/* ==================================================*/
 	//Database
-	println("20220311 define_database_table:" + iConnection)
+	println("20240621 define_database_table:" + iConnection)
 	dbsys.CreateDatabaseSchemaIfNotExists(iUseDriver, db, iDatabase)
 
 	/*tim_settings ==================================================*/
