@@ -9,7 +9,7 @@ import (
 )
 
 func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
-	println("LastModified 27102021 17:37")
+	println("LastModified 20240621 17:37")
 	// create database with parametername and delete old database/tables
 	db, _, err := dbsys.CreateDBConn(iUseDriver, iConnection, iDatabase)
 
