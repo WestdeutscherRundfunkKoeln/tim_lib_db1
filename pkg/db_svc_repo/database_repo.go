@@ -647,14 +647,18 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 	lvTable = "tim_nopremium_filter"
 	lvFields = "(" +
 		"name varchar(30)," +
+		"description varchar(100)," +
 		"active int," +
-		"sourceInfoType varchar(30)," + //fieldname, fieldset
-		"sourceInfoVal varchar(250)," + //fieldname, fieldset ","separated
-		"filterCond varchar(30)," + //value, length
+		"sourceInfoType varchar(30)," + //"fieldname", "fieldset"
+		"sourceInfoVal varchar(250)," + //fieldpath
+		"filterCond varchar(30)," + //"value", "length"
 		"conditionVal varchar(500)," +
 		"timecreate varchar(15)," +
 		"timeactive varchar(15)," +
 		"uname varchar(30)," +
+		"publ_valid_all int," +
+		"publ_valid_list varchar(500)," +
+		"publ_except_list varchar(500)," +
 		"primary key (name))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
