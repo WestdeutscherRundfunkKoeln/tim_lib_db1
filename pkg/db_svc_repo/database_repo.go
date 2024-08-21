@@ -166,6 +166,14 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		fmt.Println(statement + " OK")
 	}
 
+	statement = "drop table tim_nopremium_filter"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + " Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
+
 }
 
 // 3. define new database and tables
@@ -632,6 +640,22 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"timestatus varchar(15)," +
 		"statustxt varchar(500)," +
 		"primary key (editjobid,execpartnum))"
+
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+
+	/*tim_nopremium_filter ==============================================*/
+	lvTable = "tim_nopremium_filter"
+	lvFields = "(" +
+		"name varchar(30)," +
+		"active int," +
+		"sourceInfoType varchar(30)," + //fieldname, fieldset
+		"sourceInfoVal varchar(250)," + //fieldname, fieldset ","separated
+		"filterCond varchar(30)," + //value, length
+		"conditionVal varchar(500)," +
+		"timecreate varchar(15)," +
+		"timeactive varchar(15)," +
+		"uname varchar(30)," +
+		"primary key (name))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
