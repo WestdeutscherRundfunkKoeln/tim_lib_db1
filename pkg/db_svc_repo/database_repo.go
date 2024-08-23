@@ -666,6 +666,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 	/*tim_premium_filter ==============================================*/
 	lvTable = "tim_premium_filter"
 	lvFields = "(" +
+		"rfa  varchar(10)," +
 		"name varchar(30)," +
 		"description varchar(100)," +
 		"active int," +
@@ -679,7 +680,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"publ_valid_all int," +
 		"publ_valid_list varchar(500)," +
 		"publ_except_list varchar(500)," +
-		"primary key (name))"
+		"primary key (rfa,name))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
