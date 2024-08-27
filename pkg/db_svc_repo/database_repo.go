@@ -696,7 +696,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 	lvTable = "tim_enrich_rela"
 	lvFields = "(" +
 		"queabk varchar(10)," +
-		"whenattrname vachar(50)," +
+		"whenattrname varchar(50)," +
 		"whenattrval varchar(100)," +
 		"whenvalrela varchar(30)," + //"eq", "cs" (contains)
 		"thenrelanam varchar(50)," +
