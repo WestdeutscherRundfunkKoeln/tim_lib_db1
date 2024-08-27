@@ -695,12 +695,12 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 	/*tim_enrich_rela ==============================================*/
 	lvTable = "tim_enrich_rela"
 	lvFields = "(" +
-		"queabk  varchar(10)," +
+		"queabk varchar(10)," +
 		"whenattrname vachar(50)," +
 		"whenattrval varchar(100)," +
 		"whenvalrela varchar(30)," + //"eq", "cs" (contains)
-		"thenrelaname varchar(50)," +
-		"thentargetrelaval varchar(50)," +
+		"thenrelanam varchar(50)," +
+		"thenrelaval varchar(50)," +
 		"attrpathjson varchar(100)," +
 		"relanamesys varchar(30)," +
 		"bemerkung varchar(100)," +
