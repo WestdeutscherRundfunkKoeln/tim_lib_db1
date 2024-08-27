@@ -166,7 +166,15 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		fmt.Println(statement + " OK")
 	}
 
-	statement = "drop table tim_nopremium_filter"
+	statement = "drop table tim_premium_filter"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + " Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
+
+	statement = "drop table tim_enrich_rela"
 	_, err = db.Exec(statement)
 	if err != nil {
 		fmt.Println(statement + " Err:" + err.Error())
@@ -681,6 +689,26 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"publ_valid_list varchar(500)," +
 		"publ_except_list varchar(500)," +
 		"primary key (rfa,name))"
+
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+
+	/*tim_enrich_rela ==============================================*/
+	lvTable = "tim_enrich_rela"
+	lvFields = "(" +
+		"queabk  varchar(10)," +
+		"whenattrname vachar(50)," +
+		"whenattrval varchar(100)," +
+		"whenvalrela varchar(30)," + //"eq", "cs" (contains)
+		"thenrelaname varchar(50)," +
+		"thentargetrelaval varchar(50)," +
+		"attrpathjson varchar(100)," +
+		"relanamesys varchar(30)," +
+		"bemerkung varchar(100)," +
+		"active int," +
+		"timecreate varchar(15)," +
+		"timeactive varchar(15)," +
+		"uname varchar(30)," +
+		"primary key (queabk, whenattrname, whenattrval, whenvalrela))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
