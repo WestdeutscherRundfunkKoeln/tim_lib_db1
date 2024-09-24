@@ -710,6 +710,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"uname varchar(30)," +
 		"klasvalset varchar(500)," +
 		"minlengthtext int," +
+		"sachgebiete varchar(200)," +
 		"primary key (queabk,whenattrname,whenattrval,whenvalrela))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
