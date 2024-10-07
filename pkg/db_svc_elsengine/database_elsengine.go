@@ -131,7 +131,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"buildstarttime varchar(15)," +
 		"buildendtime varchar(15)," +
 		"channellist varchar(100)," +
-		"dataprovider  varchar(200)," +
+		"repotransformer varchar(50)," +
 		"primary key (name))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 	POINTERPRIO := "pointerprio bigint,"
