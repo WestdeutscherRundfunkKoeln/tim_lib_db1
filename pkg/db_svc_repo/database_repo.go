@@ -182,6 +182,14 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		fmt.Println(statement + " OK")
 	}
 
+	statement = "drop table tim_migaction_ctrl"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + "Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
+
 }
 
 // 3. define new database and tables
@@ -715,6 +723,24 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
+	/*tim_migaction_ctrl ==============================================*/
+	lvTable = "tim_migaction_ctrl"
+	lvFields = "(" +
+		"actionname varchar(50)," +
+		"activemigr int," +
+		"esd_startmig int," +
+		"esd_endmig int," +
+		"esd_currprocfrom int," +
+		"esd_currprocto int," +
+		"num_dealesdday int," +
+		"time_currproc varchar(15)," +
+		"implementbysvc varchar(150)," +
+		"running int," +
+		"exec_relevancy int," +
+		"numcheckeddangling int," +
+		"primary key (actionname))"
+
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 	/*Idx ===============================================================*/
 
 	/*===================================================*/
