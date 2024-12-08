@@ -738,6 +738,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"running int," +
 		"exec_relevancy int," +
 		"numcheckeddangling int," +
+		"actionlogical varchar(50)," +
 		"primary key (actionname))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
