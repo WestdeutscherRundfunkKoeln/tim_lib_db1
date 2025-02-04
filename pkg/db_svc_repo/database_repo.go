@@ -190,6 +190,14 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		fmt.Println(statement + " OK")
 	}
 
+	statement = "drop table tim_persabgl_ctrl"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + "Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
+
 }
 
 // 3. define new database and tables
@@ -740,8 +748,18 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"numcheckeddangling int," +
 		"actionlogical varchar(50)," +
 		"primary key (actionname))"
-
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+
+	/*tim_persabgl_ctrl ==============================================*/
+	lvTable = "tim_persabgl_ctrl"
+	lvFields = "(" +
+		"sapid int," +
+		"ndbid int," +
+		"status varchar(20)," +
+		"timecreate varchar(15)," +
+		"timeproc varchar(15)," +
+		"primary key (sapid))"
+
 	/*Idx ===============================================================*/
 
 	/*===================================================*/
