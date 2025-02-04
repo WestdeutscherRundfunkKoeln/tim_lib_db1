@@ -759,7 +759,9 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"timecreate varchar(15)," +
 		"timeproc varchar(15)," +
 		"primary key (sapid))"
-
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+	lvIdxStatement.Text = `CREATE INDEX abglstat ON tim_persabgl (status)`
+	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
 	/*Idx ===============================================================*/
 
 	/*===================================================*/
