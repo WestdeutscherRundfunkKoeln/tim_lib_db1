@@ -758,10 +758,25 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"status varchar(20)," +
 		"timecreate varchar(15)," +
 		"timeproc varchar(15)," +
+		"numdocs int," +
+		"docscomplete int," +
 		"primary key (sapid))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 	lvIdxStatement.Text = `CREATE INDEX abglstat ON tim_persabgl_ctrl (status)`
 	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
+	/*tim_persabgldoc_ctrl ==============================================*/
+	lvTable = "tim_persabgldoc_ctrl"
+	lvFields = "(" +
+		"sapid int," +
+		"docid int," +
+		"status varchar(20)," +
+		"timecreate varchar(15)," +
+		"timeproc varchar(15)," +
+		"primary key (sapid,docid))"
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+	lvIdxStatement.Text = `CREATE INDEX abgdocst ON tim_persabgldoc_ctrl (status)`
+	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
+
 	/*Idx ===============================================================*/
 
 	/*===================================================*/
