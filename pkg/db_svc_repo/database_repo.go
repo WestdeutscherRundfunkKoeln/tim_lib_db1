@@ -760,6 +760,8 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"timeproc varchar(15)," +
 		"numdocs int," +
 		"docscomplete int," +
+		"numdocsau int," +
+		"numdocsint int," +
 		"primary key (sapid))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 	lvIdxStatement.Text = `CREATE INDEX abglstat ON tim_persabgl_ctrl (status)`
