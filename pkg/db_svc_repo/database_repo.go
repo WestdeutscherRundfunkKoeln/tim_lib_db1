@@ -750,9 +750,11 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"timecreate varchar(15)," +
 		"timeactive varchar(15)," +
 		"uname varchar(30)," +
-		"gattung varchar(50)," +
+		"gattung1 varchar(50)," +
+		"gattung2 varchar(50)," +
 		"weiteregat varchar(50)," +
-		"sachgeb varchar(50)," +
+		"sachgeb1 varchar(50)," +
+		"sachgeb2 varchar(50)," +
 		"geo1 varchar(100)," +
 		"geo2 varchar(100)," +
 		"klasse1_ndbid varchar(20)," +
