@@ -182,6 +182,13 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		fmt.Println(statement + " OK")
 	}
 
+	statement = "drop table tim_enrichrule"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + " Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
 	statement = "drop table tim_migaction_ctrl"
 	_, err = db.Exec(statement)
 	if err != nil {
@@ -727,6 +734,36 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"klasvalset varchar(500)," +
 		"minlengthtext int," +
 		"sachgebiete varchar(200)," +
+		"primary key (queabk,whenattrname,whenattrval,whenvalrela))"
+
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+
+	/*tim_enrichrule ==============================================*/
+	lvTable = "tim_enrichrule"
+	lvFields = "(" +
+		"queabk varchar(10)," +
+		"whenattrname varchar(50)," +
+		"whenattrval varchar(100)," +
+		"whenvalrela varchar(30)," + //"eq", "cs" (contains)
+		"minlentext int," +
+		"active int," +
+		"timecreate varchar(15)," +
+		"timeactive varchar(15)," +
+		"uname varchar(30)," +
+		"gattung varchar(50)," +
+		"weiteregat varchar(50)," +
+		"sachgeb varchar(50)," +
+		"geo1 varchar(100)," +
+		"geo2 varchar(100)," +
+		"klasse1_ndbid varchar(20)," +
+		"klasse1_abk varchar(20)," +
+		"klasse1_text varchar(100)," +
+		"klasse2_ndbid varchar(20)," +
+		"klasse2_abk varchar(20)," +
+		"klasse2_text varchar(100)," +
+		"klasse3_ndbid varchar(20)," +
+		"klasse3_abk varchar(20)," +
+		"klasse3_text varchar(100)," +
 		"primary key (queabk,whenattrname,whenattrval,whenvalrela))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
