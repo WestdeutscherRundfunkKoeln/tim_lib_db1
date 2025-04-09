@@ -755,8 +755,10 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"weiteregat varchar(50)," +
 		"sachgeb1 varchar(50)," +
 		"sachgeb2 varchar(50)," +
-		"geo1 varchar(100)," +
-		"geo2 varchar(100)," +
+		"geo1_ndbid varchar(20)," +
+		"geo1_text varchar(100)," +
+		"geo2_ndbid varchar(20)," +
+		"geo2_text varchar(100)," +
 		"klasse1_ndbid varchar(20)," +
 		"klasse1_abk varchar(20)," +
 		"klasse1_text varchar(100)," +
