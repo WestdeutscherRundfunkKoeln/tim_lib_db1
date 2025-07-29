@@ -83,6 +83,15 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 	} else {
 		fmt.Println(statement + " OK")
 	}
+
+	statement = "drop table els_chkcomplete_ctrl"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + " Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
+
 }
 
 func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSetting shared.SettingAddr) {
@@ -216,7 +225,6 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 	println("els_ingestreport_repo:DONE.")
 
 	println("tim_settings will be created:iUseDriver:", iUseDriver)
-
 	lvTable = "tim_settings"
 	settings := "settings mediumblob, "
 	if iUseDriver != "mysql" {
@@ -226,6 +234,19 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"settingsname  varchar(20)," +
 		settings +
 		"primary key (settingsname))"
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+
+	println("els_chkcomplete_ctrl:", iUseDriver)
+	lvTable = "els_chkcomplete_ctrl"
+	lvFields = "(" +
+		"indexname  varchar(50)," +
+		"activechk int," +
+		"datestart int," +
+		"dateend int," +
+		"datecurrproc int, " +
+		"timecurrproc varchar(15)," +
+		"checktype varchar(15)," +
+		"primary key (indexname, checktype))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
 	lvIdxStatement.Text = `CREATE INDEX IORDER ON els_ingestorder_repo (orderstate,createtime,elsmachinename)`
