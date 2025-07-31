@@ -328,6 +328,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"BR char(1)," +
 		"ABLAUFDAT varchar(15)," +
 		"Timxmlname varchar(250)," +
+		"timelastchange varchar(15)," +
 		"primary key (entityid,entitytype))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
