@@ -92,6 +92,14 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		fmt.Println(statement + " OK")
 	}
 
+	statement = "drop table els_sync_prot"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + " Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
+
 }
 
 func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSetting shared.SettingAddr) {
@@ -236,7 +244,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"primary key (settingsname))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
-	println("els_chkcomplete_ctrl:", iUseDriver)
+	println("els_chkcomplete_ctrl:iUseDriver:", iUseDriver)
 	lvTable = "els_chkcomplete_ctrl"
 	lvFields = "(" +
 		"indexname  varchar(50)," +
@@ -247,6 +255,19 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"timecurrproc varchar(15)," +
 		"checktype varchar(15)," +
 		"primary key (indexname, checktype))"
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+
+	println("els_sync_prot:iUseDriver:", iUseDriver)
+	lvTable = "els_sync_prot"
+	lvFields = "(" +
+		"indexname  varchar(50)," +
+		"datecheck char(8)," +
+		"checktype varchar(15)," +
+		"numdocs_db int," +
+		"numdocs_els int," +
+		"synced int," +
+		"timechecked varchar(15)," +
+		"primary key (indexname, datecheck,checktype))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
 	lvIdxStatement.Text = `CREATE INDEX IORDER ON els_ingestorder_repo (orderstate,createtime,elsmachinename)`
