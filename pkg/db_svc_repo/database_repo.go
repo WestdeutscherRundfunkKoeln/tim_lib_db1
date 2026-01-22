@@ -304,6 +304,10 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 	if iUseDriver != "mysql" {
 		entityid = "entityid number, "
 	}
+	duplicate_maindocid := "duplicate_maindocid bigint, "
+	if iUseDriver != "mysql" {
+		duplicate_maindocid = "duplicate_maindocid number, "
+	}
 	lvFields = "(" +
 		entityid +
 		"entitytype varchar(10)," +
@@ -329,6 +333,13 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"ABLAUFDAT varchar(15)," +
 		"Timxmlname varchar(250)," +
 		"timelastchange varchar(15)," +
+		"duplicate_check varchar(1)," + //'1' calc duplicate_stat, "0" or is null
+		"duplicate_stat varchar(1)," + //null or blank or '0' initialstate [duplicate state unknown]
+		//'1' mainrecord no duplicates available,
+		//'2' mainrecord duplicates available,
+		//'9' duplicate entity
+		"duplicate_stattim varchar(15)," + //
+		duplicate_maindocid +
 		"primary key (entityid,entitytype))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
@@ -337,6 +348,19 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 	println(lvIdxStatement.Text)
 
 	lvIdxStatement.Text = `CREATE INDEX exmdhcs ON tim_entitystate (exporttomdhcs)`
+	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
+	println(lvIdxStatement.Text)
+
+	lvIdxStatement.Text = `CREATE INDEX duplcheck ON tim_entitystate (duplcheck)`
+	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
+	println(lvIdxStatement.Text)
+	lvIdxStatement.Text = `CREATE INDEX duplstat ON tim_entitystate (duplstat)`
+	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
+	println(lvIdxStatement.Text)
+	lvIdxStatement.Text = `CREATE INDEX dupltim ON tim_entitystate (dupltim)`
+	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
+	println(lvIdxStatement.Text)
+	lvIdxStatement.Text = `CREATE INDEX duplref ON tim_entitystate (duplref)`
 	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
 	println(lvIdxStatement.Text)
 
