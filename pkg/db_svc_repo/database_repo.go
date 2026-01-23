@@ -333,8 +333,8 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"ABLAUFDAT varchar(15)," +
 		"Timxmlname varchar(250)," +
 		"timelastchange varchar(15)," +
-		"duplicate_check varchar(1)," + //'1' calc duplicate_stat, "0" or is null
-		"duplicate_stat varchar(1)," + //null or blank or '0' initialstate [duplicate state unknown]
+		"duplicate_check int," + //'1' calc duplicate_stat, "0" or is null
+		"duplicate_stat int," + //null or blank or '0' initialstate [duplicate state unknown]
 		//'1' mainrecord no duplicates available,
 		//'2' mainrecord duplicates available,
 		//'9' duplicate entity
