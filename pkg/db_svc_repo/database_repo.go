@@ -205,6 +205,14 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		fmt.Println(statement + " OK")
 	}
 
+	statement = "drop table tim_dblchk_order"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + " Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
+
 }
 
 // 3. define new database and tables
@@ -843,6 +851,26 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"primary key (sapid,docid))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 	lvIdxStatement.Text = `CREATE INDEX abgdocst ON tim_persabgldoc_ctrl (status)`
+	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
+
+	/*tim_dblchk_order ==============================================*/
+	lvTable = "tim_dblchk_order"
+	lvFields = "(" +
+		"quetype varchar(20)," +
+		"quevalue varchar(100)," +
+		"esdfrom varchar(15)," +
+		"esdto varchar(15)," +
+		"timecrea varchar(15)," +
+		"timestartproc varchar(15)," +
+		"timeendproc varchar(15)," +
+		"state varchar(20)," +
+		"numdok int," +
+		"numdokdubl int," +
+		"numdoknodubl int," +
+		"numdokisref int," +
+		"primary key (quetype,quevalue,esdfrom,esdto,timecrea))"
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+	lvIdxStatement.Text = `CREATE INDEX dblchkstate ON tim_dblchk_order (state,timecrea)`
 	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
 
 	/*Idx ===============================================================*/
