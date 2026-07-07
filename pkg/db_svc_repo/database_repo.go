@@ -888,7 +888,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"timecrea varchar(15)," +
 		"timechange varchar(15)," +
 		"usrchange varchar(15)," +
-		"primary key (name,value))"
+		"primary key (name))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
 	/*Idx ===============================================================*/
