@@ -212,6 +212,13 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 	} else {
 		fmt.Println(statement + " OK")
 	}
+	statement = "drop table tim_dblchk_admin"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + " Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
 
 }
 
@@ -872,6 +879,17 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 	lvIdxStatement.Text = `CREATE INDEX dblchkstate ON tim_dblchk_order (state,timecrea)`
 	ltIdxStatement = append(ltIdxStatement, lvIdxStatement)
+
+	/*tim_dblchk_admin ==============================================*/
+	lvTable = "tim_dblchk_admin"
+	lvFields = "(" +
+		"name varchar(20)," +
+		"value varchar(500)," +
+		"timecrea varchar(15)," +
+		"timechange varchar(15)," +
+		"usrchange varchar(15)," +
+		"primary key (name,value))"
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
 	/*Idx ===============================================================*/
 
