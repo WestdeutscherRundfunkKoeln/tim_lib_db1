@@ -877,7 +877,7 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"numdokisref int," +
 		"numtry int," +
 		"lastliveacttime varchar(15)," +
-		"processeddoclis " + useBlob +
+		"startplantime varchar(15), " +
 		"primary key (quetype,quevalue,esdfrom,esdto,timecrea))"
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 	lvIdxStatement.Text = `CREATE INDEX dblchkstate ON tim_dblchk_order (state,timecrea)`
