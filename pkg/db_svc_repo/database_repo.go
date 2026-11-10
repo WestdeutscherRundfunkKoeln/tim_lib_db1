@@ -190,7 +190,7 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 		fmt.Println(statement + " OK")
 	}
 
-	statement = "drop table tim_errichspelling"
+	statement = "drop table tim_enrichspelling"
 	_, err = db.Exec(statement)
 	if err != nil {
 		fmt.Println(statement + " Err:" + err.Error())
@@ -821,8 +821,8 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
-	/*tim_errichspelling ==============================================*/
-	lvTable = "tim_errichspelling"
+	/*tim_enrichspelling ==============================================*/
+	lvTable = "tim_enrichspelling"
 	lvFields = "(" +
 		"rootword varchar(20)," +
 		"derivations varchar(500)," +
