@@ -189,6 +189,15 @@ func DropDatabaseTables(iUseDriver string, iConnection, iDatabase string) {
 	} else {
 		fmt.Println(statement + " OK")
 	}
+
+	statement = "drop table tim_errichspelling"
+	_, err = db.Exec(statement)
+	if err != nil {
+		fmt.Println(statement + " Err:" + err.Error())
+	} else {
+		fmt.Println(statement + " OK")
+	}
+
 	statement = "drop table tim_migaction_ctrl"
 	_, err = db.Exec(statement)
 	if err != nil {
@@ -809,6 +818,16 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"klasse3_abk varchar(20)," +
 		"klasse3_text varchar(100)," +
 		"primary key (queabk,whenattrname,whenattrval,whenvalrela))"
+
+	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
+
+	/*tim_errichspelling ==============================================*/
+	lvTable = "tim_errichspelling"
+	lvFields = "(" +
+		"rootword varchar(20)," +
+		"derivations varchar(500)," +
+		"active int," +
+		"primary key (rootword))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
 
