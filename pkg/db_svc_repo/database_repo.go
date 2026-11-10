@@ -827,6 +827,9 @@ func CreateDatabaseTables(iUseDriver string, iConnection, iDatabase string, iSet
 		"rootword varchar(20)," +
 		"derivations varchar(500)," +
 		"active int," +
+		"uname varchar(30)," +
+		"timecreate varchar(15)," +
+		"timeactive varchar(15)," +
 		"primary key (rootword))"
 
 	dbsys.CreateTable(iUseDriver, db, oraDB, lvTable, lvFields)
